@@ -3,28 +3,14 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Form, Input, Select, DatePicker } from "antd";
 import { useParams } from "react-router-dom";
 import TaskItem from "./taskItem";
-import { StatusEnum } from "../../enums/statusEnum";
+import { selectListOptions } from "../../helper/selectListOptions";
 
 const TaskList = ({}) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
   let { projectId } = useParams();
-
-  const selectListOptions = [
-    {
-      value: StatusEnum.To_Do,
-      label: "To Do",
-    },
-    {
-      value: StatusEnum.In_Progress,
-      label: "In Progress",
-    },
-    {
-      value: StatusEnum.Done,
-      label: "Done",
-    },
-  ];
 
   const getTasksOfCurrentProject = () => {
     fetch(`http://localhost:3500/tasks?projectId=${projectId}`, {
@@ -53,6 +39,7 @@ const TaskList = ({}) => {
         setIsLoading(false);
         setOpen(false);
         getTasksOfCurrentProject();
+        form.resetFields();
       });
   };
 
@@ -61,6 +48,7 @@ const TaskList = ({}) => {
   };
   const handleCancel = () => {
     setOpen(false);
+    form.resetFields();
   };
   const onFinish = (values) => {
     addNewTask(values);
@@ -94,7 +82,7 @@ const TaskList = ({}) => {
         onCancel={handleCancel}
         footer={false}
       >
-        <Form onFinish={onFinish} autoComplete="off">
+        <Form form={form} onFinish={onFinish} autoComplete="off">
           <Form.Item
             label="Name"
             name="name"
@@ -108,11 +96,29 @@ const TaskList = ({}) => {
             <Input />
           </Form.Item>
 
-          <Form.Item label="Description" name="description">
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: "This input is required!",
+              },
+            ]}
+          >
             <Input />
           </Form.Item>
 
-          <Form.Item label="Status" name="status">
+          <Form.Item
+            label="Status"
+            name="status"
+            rules={[
+              {
+                required: true,
+                message: "This input is required!",
+              },
+            ]}
+          >
             <Select
               options={selectListOptions}
               rules={[
@@ -124,7 +130,16 @@ const TaskList = ({}) => {
             />
           </Form.Item>
 
-          <Form.Item label="DueDate" name="dueDate">
+          <Form.Item
+            label="DueDate"
+            name="dueDate"
+            rules={[
+              {
+                required: true,
+                message: "This input is required!",
+              },
+            ]}
+          >
             <DatePicker
               rules={[
                 {

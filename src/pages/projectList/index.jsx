@@ -1,12 +1,13 @@
 import classes from "./projectList.module.css";
 import { useEffect, useState } from "react";
 import { Button, Modal, Form, Input } from "antd";
-import ProjectItem from './projectItem';
+import ProjectItem from "./projectItem";
 
 const ProjectList = ({}) => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
 
   const getListOfAllProjects = () => {
     fetch("http://localhost:3500/projects")
@@ -31,6 +32,7 @@ const ProjectList = ({}) => {
         setIsLoading(false);
         setOpen(false);
         getListOfAllProjects();
+        form.resetFields();
       });
   };
 
@@ -39,6 +41,7 @@ const ProjectList = ({}) => {
   };
   const handleCancel = () => {
     setOpen(false);
+    form.resetFields();
   };
   const onFinish = (values) => {
     addNewProject(values);
@@ -56,7 +59,10 @@ const ProjectList = ({}) => {
         <div className={classes.textCenter}>loading...</div>
       ) : (
         <div className={classes.project_wrapper}>
-          <ProjectItem projects={projects} getListOfAllProjects={getListOfAllProjects}/>
+          <ProjectItem
+            projects={projects}
+            getListOfAllProjects={getListOfAllProjects}
+          />
         </div>
       )}
 
@@ -66,7 +72,7 @@ const ProjectList = ({}) => {
         onCancel={handleCancel}
         footer={false}
       >
-        <Form onFinish={onFinish} autoComplete="off">
+        <Form form={form} onFinish={onFinish} autoComplete="off">
           <Form.Item
             label="Name"
             name="name"
@@ -80,7 +86,16 @@ const ProjectList = ({}) => {
             <Input />
           </Form.Item>
 
-          <Form.Item label="Description" name="description">
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: "This input is required!",
+              },
+            ]}
+          >
             <Input />
           </Form.Item>
 
