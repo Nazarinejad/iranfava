@@ -1,0 +1,31 @@
+.heading{
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3%;
+}
+.textCenter{
+  text-align: center;
+}
+.addButton{
+  margin-bottom: 24px;
+}
+.task_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap:16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .task_wrapper {
+    justify-content: space-around;
+  }
+}
+
+@media (min-width: 1000px) {
+  .task_wrapper {
+    justify-content: start;
+  }
+}

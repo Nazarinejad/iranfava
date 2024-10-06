@@ -1,0 +1,47 @@
+.projectCard {
+  background-color: #fff;
+  box-shadow: 0 0 5px #eee;
+  border-radius: 8px;
+  padding: 40px;
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.deleteIcon_wrapper{
+  display: flex;
+  align-self: flex-end;
+  cursor: pointer;
+  color: rgb(181, 16, 90);
+}
+.deleteIcon_wrapper span{
+  margin-left: 5px;
+  color: rgb(181, 16, 90);
+  top:2px;
+  position: relative;
+}
+.projectCard h5 {
+  color: blueviolet;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.showMoreBtn{
+  background-color: blueviolet;
+  color: #fff;
+  align-self: flex-end;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-top: 32px;
+}
+@media (min-width: 768px) {
+  .projectCard {
+    flex-basis: calc(37% - 24px);
+  }
+}
+
+@media (min-width: 1000px) {
+  .projectCard {
+    flex-basis: calc(33% - 120px);
+  }
+}

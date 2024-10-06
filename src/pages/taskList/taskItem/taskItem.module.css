@@ -1,0 +1,70 @@
+.taskCard {
+  background-color: #fff;
+  box-shadow: 0 0 5px #eee;
+  border-radius: 8px;
+  padding: 40px;
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.deleteIcon_wrapper{
+  display: flex;
+  align-self: flex-end;
+  cursor: pointer;
+  color: rgb(181, 16, 90);
+}
+.deleteIcon_wrapper span{
+  margin-left: 5px;
+  color: rgb(181, 16, 90);
+  top:2px;
+  position: relative;
+}
+.status{
+  text-align: right;
+  display: flex;
+  align-self: flex-end;
+  padding: 2px 10px 4px;
+  border-radius: 15px;
+  box-shadow: 0 0 8px #ccc;
+}
+.To_Do{
+  background-color: aqua;
+}
+.In_Progress{
+  background-color: yellow;
+}
+.Done{
+  background-color: green;
+}
+.taskCard h5 {
+  color: blue;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.taskCard p{
+  margin-top: 5px;
+  color: #aaa;
+  font-size: 0.9em;
+  margin-bottom: 24px;
+}
+.showMoreBtn{
+  background-color: blueviolet;
+  color: #fff;
+  align-self: flex-end;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-top: 32px;
+}
+@media (min-width: 768px) {
+  .taskCard {
+    flex-basis: calc(37% - 24px);
+  }
+}
+
+@media (min-width: 1000px) {
+  .taskCard {
+    flex-basis: calc(33% - 120px);
+  }
+}
